@@ -32,7 +32,7 @@ class RecipeTest < ActiveSupport::TestCase
   end
   
   test "summary length should not be too long" do
-    @recipe.summary = "a"*150
+    @recipe.summary = "a"*151
     assert_not @recipe.valid?
   end
   

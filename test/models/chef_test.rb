@@ -26,12 +26,21 @@ class ChefTest < ActiveSupport::TestCase
   end
   
   test "email should be present" do
+    @chef.email = " "
     assert_not @chef.valid?
   end
   
   test "email length should be within bounds" do
     @chef.email = "a" * 101 + "@example.com"
     assert_not @chef.valid?
+  end
+  
+  test "email address should be unique" do
+    dup_chef = @chef.dup
+    dup_chef.email = @chef.email.upcase
+    @chef.save
+    assert_not  dup_chef.valid?
+    
   end
   
 end
